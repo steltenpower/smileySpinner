@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://binarybubblegum.nl/ruud/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>smileyTap</title>
+<style>
+html,body{
+    height:100%;
+    overflow:hidden;
+}
+body{padding:0;margin:0;border:0;background-color:grey;}
+svg{padding:0;margin:0;border:0;height:100%;width:100%;}
+</style>
+<script>
+var count_red=0;
+var count_orange=0;
+var count_green=0;
+function count(code){
+    switch(code){
+        case "orange":
+             count_orange++;
+             break;
+        case "red":
+             count_red++;
+             break;
+        case "green":
+             count_green++;
+             break;
+    }
+}
+function show(){
+    alert("red:"+count_red+"\norange:"+count_orange+"\ngreen:"+count_green);
+}
+function shorten(number, precision) {
+    var factor = Math.pow(10, precision);
+    var tempNumber = number * factor;
+    var roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
+}
+function s(nr){
+    return shorten(nr,4);
+}
+function createSVG() {
+    var r=0.5;
+    console.log("0 st r="+r+" ste "+s(Math.sqrt(3/4)));
+    var delta=0.6;
+    console.log("0.5 ste delta="+delta+" st infinity");
+    var max=1+r;
+    var viewBox=""+-max+" "+-max+" "+2*max+" "+2*max;
+    var svgElem = document.createElement("svg");
+    svgElem.setAttribute("viewBox", viewBox);
+    svgElem.setAttribute('transform','scale(1,-1)');
+
+    var g = document.createElement("g");
+    svgElem.appendChild (g);
+
+    var p=s(Math.sqrt(Math.pow(delta,2)+3/4)-r);
+    var alpha=Math.atan(delta/Math.sqrt(3/4));
+    var x1=  r*Math.cos(alpha-Math.PI/3);
+    var y1=1+r*Math.sin(alpha-Math.PI/3);
+    var Beta1=Math.atan(y1/x1);
+    var hyp=Math.sqrt(Math.pow(x1,2)+Math.pow(y1,2));
+    x1=s(x1);
+    y1=s(y1);
+    var Beta6=Math.PI-Beta1;
+    var Beta3=Beta1-2*Math.PI/3;
+    var Beta2=Beta6-2*Math.PI/3;
+    var y2=s(hyp*Math.sin(Beta2));
+    var x2=s(hyp*Math.cos(Beta2));
+    var y3=s(hyp*Math.sin(Beta3));
+    var x3=s(hyp*Math.cos(Beta3));
+    var x4=-x3;
+    var y4=y3;
+    var x5=-x2;
+    var y5=y2;
+    var x6=-x1;
+    var y6=y1;
+
+    var path = document.createElement("path");
+    var d='M '+x1+' '+y1+'\n'+
+        'A '+p+' '+p+' 0 0 1 '+x2+' '+y2+'\n'+
+        'A '+r+' '+r+' 0 1 0 '+x3+' '+y3+'\n'+
+        'A '+p+' '+p+' 0 0 1 '+x4+' '+y4+'\n'+
+        'A '+r+' '+r+' 0 1 0 '+x5+' '+y5+'\n'+
+        'A '+p+' '+p+' 0 0 1 '+x6+' '+y6+'\n'+
+        'A '+r+' '+r+' 0 1 0 '+x1+' '+y1;
+    path.setAttribute('d',d);
+    path.setAttribute('fill','black');
+    path.setAttribute('stroke','yellow');
+    path.setAttribute('stroke-width','0.1');
+    g.appendChild(path);
+}
+
+
+</script></head>
+<body onload="createSVG()">
+<svg viewBox="-1.6 -1.6 3.2 3.2">
+ <defs>
+      <clippath id="clipPath">
+          <circle r="0.4"></circle>
+      </clippath>
+  </defs>
+
+<g transform="rotate(146.516)">
+     <animatetransform attributeName="transform" begin="0s" dur="30s" type="rotate" from="0 0 0" to="360 0 0" repeatCount="indefinite"></animatetransform>
+<g transform="scale(1,-1)">
+<path fill="black" stroke-width="0" d="
+M 0.4521 0.7864 
+A 0.5536 0.5536 0 0 1 0.9071 -0.0017 
+A 0.5 0.5 0 1 0 0.455 -0.7847 
+A 0.5536 0.5536 0 0 1 -0.455 -0.7847 
+A 0.5 0.5 0 1 0 -0.9071 -0.0017 
+A 0.5536 0.5536 0 0 1 -0.4521 0.7864 
+A 0.5 0.5 0 1 0 0.4521 0.7864"></path>
+<circle cy="1" r="0.4" fill="red"></circle>
+
+
+<g transform="translate(0,1)scale(0.04)" onclick="count(&#39;red&#39;);">
+<circle r="10" fill="red"></circle>
+<circle r="1" fill="black"></circle>
+<circle cx="-4" cy="4" r="1" fill="black"></circle>
+<circle cx="4" cy="4" r="1" fill="black"></circle>
+<path d="M-5,-7 C-5,-2 5,-2 5,-7" stroke="black" fill="none" stroke-width="1"></path>
+</g>
+
+<g transform="translate(0.866,-0.5)rotate(-120)scale(0.04)" onclick="count(&#39;orange&#39;);">
+<circle r="10" fill="orange"></circle>
+<circle r="1" fill="black"></circle>
+<circle cx="-4" cy="4" r="1" fill="black"></circle>
+<circle cx="4" cy="4" r="1" fill="black"></circle>
+<line y1="-4" y2="-4" x1="-4" x2="4" stroke="black" stroke-width="1"></line>
+</g>
+
+
+<g transform="translate(-0.866,-0.5)rotate(120)scale(0.04)" onclick="count(&#39;green&#39;);">
+<circle r="10" fill="#A6CE39"></circle>
+<circle r="1" fill="white"></circle>
+<circle cx="-4" cy="4" r="1" fill="white"></circle>
+<circle cx="4" cy="4" r="1" fill="white"></circle>
+<path d="M-5,-2 C-5,-7 5,-7 5,-2" stroke="white" fill="none" stroke-width="1"></path>
+</g>
+
+
+</g>
+<path d="M-0.35,-0.35 l0.7,0.7" stroke="blue" stroke-width="0.1"></path>
+<circle r="0.4" fill="white" ondblclick="show()"></circle>
+</g>
+<path d="M-1,-1 L1,1" stroke="blue" stroke-width="0.1" style="clip-path: url(#clipPath); "></path>
+</svg>
+</body></html>
