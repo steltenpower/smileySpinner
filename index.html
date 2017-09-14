@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>smileyTap</title>
 <style>
@@ -12,6 +13,9 @@ svg{padding:0;margin:0;border:0;height:100%;width:100%;}
 var count_red=0;
 var count_orange=0;
 var count_green=0;
+function greyAgain(){
+    document.body.style.background="grey";
+}
 function count(code){
     switch(code){
         case "orange":
@@ -24,6 +28,10 @@ function count(code){
              count_green++;
              break;
     }
+    var color=code;
+    if (color=="green") color="#A6CE39";
+    document.body.style.background = color;
+    setTimeout ("greyAgain()",150);
 }
 function show(){
     alert("sad:"+count_red+"\nneutral:"+count_orange+"\nhappy:"+count_green);
